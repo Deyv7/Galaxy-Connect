@@ -8,6 +8,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+
+   <!--ICONS GOOGLE-->
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+   <!-- Fonte Karla -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <!-- Estilo do Site -->
     <link rel="stylesheet" href="css/style.css">
 
     <title>Galaxy Connect</title>
@@ -15,7 +24,7 @@
 
 <body>
     <div class="container-fluid""> <!-- Container -->
-        <h5 style="text-indent: -9999px;">Galaxy Connect</h5>
+        <h6 style="text-indent: -9999px;">Galaxy Connect</h6>
         <nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
             <!-- Logo -->
             <a href="" class="navbar-brand">Galaxy Connect</a>
@@ -29,11 +38,16 @@
                 <ul class="navbar-nav m-auto">
 
                     <li class="nav-item">
-                        <a href="" class="nav-link active">Home</a>
+                        <a href="" class="nav-link active">
+                        <span class="material-symbols-outlined" style="margin-left: 9px;">home</span>Home</a>
                     <li>
-
                     <li class="nav-item dropdown">
-                        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Sobre</a>
+                        <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                            <span class="material-symbols-outlined" style="margin-left: 12px;">
+                                more_up
+                                </span>
+                            Sobre
+                        </a>
                         <div class="dropdown-menu">
                             <a href="" class="dropdown-item">Descubra sobre nós</a>
                             <a href="" class="dropdown-item">O que fazemos?</a>
@@ -41,27 +55,33 @@
                     <li>
                     
                     <li class="nav-item">
-                        <a href="" class="nav-link">Login</a>
+                        <a href="" class="nav-link">
+                            <span class="material-symbols-outlined" style="margin-left: 5px;">login</span>Login</a>
                     <li>
                 </ul>
         </nav>
-        
-        <br>
-        <br>
 
-        <div class="container marcador-container">
-            <div class="row marcador">
-              <div class="col-6 col-sm-6">
-                <h5>Atualizaçõo 1.0</h5>
-                Essa Atualização trás a nova cara do site que está se erguendo aos poucos.
+        <div class="container post"> <!-- Posts -->
+            <div class="row">
+              <div class="col-xl-6 col-sm-8 update"> <!-- Atualizações -->
+                <h5>Atualização 1.0</h5> 
+                <p>Essa Atualização trás a nova cara do site que está com design responsivo e bem minimalista de um jeito fácil e interativo para o usuário.</p>
+                <p><a href="#">Saiba mais sobre a atualização</a></p>
+                <img src="https://i.ibb.co/JcZthsb/Design-Responsivo.png" height="400px" width="300px" alt="">
               </div>
-              <div class="col-6 col-sm-6">
+              
+              <div class="col-xl-6 col-sm-8 community"> <!-- Comunidade -->
                 <h5>Comunidade</h5>
-                Junte-se a comunidade do Galaxy Connect e fique por dentro de todas as coisas que estão acontecendo.
+                <p>Junte-se a comunidade do Galaxy Connect e fique por dentro de todas as coisas que estão acontecendo.</p>
+                <iframe src="https://discord.com/widget?id=817555826083364894&theme=dark" width="300" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
               </div>
             </div>
           </div>
     </div>
+
+    <footer class="container">
+        <h6>Created By <a target="_blank" href="https://github.com/Deyv7/">Deyv7</a> &copy; 2024-2024</h6>
+    </footer>
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

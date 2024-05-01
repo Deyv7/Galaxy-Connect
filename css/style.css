@@ -3,14 +3,35 @@
     padding: 0;
 }
 body { /* NÃO ESQUECER DE TROCAR A FONTE */
-    font-family: 'Mukta', 'Kanit', 'PT Sans', sans-serif;
+    font-family: 'Karla', sans-serif;
     background: #dadada;
 }
-.marcador {
-    background-color: #fe9d9d;
-    border: 1px solid #f94646;
+.material-symbols-outlined { /* ICONS GOOGLE */
+display: block;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' 10
+  }
+  /* --- POSTS --- */
+.post {
+    background: #f9f9f9;
+    margin-top: 15px;
+    border: 5px solid #343a40;
 }
-.marcador-container {
-    background-color: #5bf946;
-    border: 1px solid #36ae26;
+
+.update {
+ border: 1px solid #343a40;
+}
+.community {
+border: 1px solid #343a40;
+
+}
+
+/* FONTS */
+h5 {
+    margin-top: 12px;
+    color: #343a40;
+    font-weight: 900;
 }
