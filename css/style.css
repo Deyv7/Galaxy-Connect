@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body { /* NÃO ESQUECER DE TROCAR A FONTE */
+    font-family: 'Mukta', 'Kanit', 'PT Sans', sans-serif;
+    background: #dadada;
+}
+.marcador {
+    background-color: #fe9d9d;
+    border: 1px solid #f94646;
+}
+.marcador-container {
+    background-color: #5bf946;
+    border: 1px solid #36ae26;
+}
