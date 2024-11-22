@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -61,35 +60,39 @@
                     <li>
                     
                     <li class="nav-item">
-                        <a href="login.html" class="nav-link active">
+                        <a href="login.html" class="nav-link">
                             <span class="material-symbols-outlined" style="margin-left: 5px;">login</span>Login</a>
                     <li>
+                    <li class="nav-item">
+                        <a href="registro.html" class="nav-link active">
+                            <span class="material-symbols-outlined" style="margin-left: 17px;">Flight</span>Registro</a>
+                    <li>
                 </ul>
-        </nav>
-
-
+        </nav>    
+    </div>    
+    <div class="container">
         <form method="POST" class="formLogin">
-            <h1>Login</h1>
-            <p>Digite os seus dados de acesso no campo abaixo.</p>
+            <h1>Registro</h1>
+            <p>Faça o seu registro, para acessar a plataforma.</p>
+            <label for="email">Usuário</label>
+            <input type="email" placeholder="Digite seu Usuário" pattern="[A-Za-z0-9]+" autofocus required/>
             <label for="email">E-mail</label>
-            <input type="email" placeholder="Digite seu e-mail" autofocus="true" />
+            <input type="email" placeholder="Digite seu e-mail" required/>
             <label for="password">Senha</label>
-            <input type="password" placeholder="Digite sua senha" />
-            <div>
-                <a style="float: left;" href="/">Esqueci minha senha</a>
-                <a style="float: right; margin-right: 10px;" href="registro.html">Registrar</a>
-            </div>
-            <input type="submit" value="Acessar" class="btn-dark" />
-            <footer class="container">
+            <input type="password" placeholder="Digite sua senha" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"/>
+            <label for="password-confirm">Confirme a Senha</label>
+            <input type="password" placeholder="Digite novamente sua senha" required />
+            <input type="submit" value="Registrar-se" class="btn-dark" />
+            <footer class="container" style="margin-left: 0;">
                 <p>Created By <a target="_blank" href="https://github.com/Deyv7/">Deyv7</a> &copy; 2024-2024<p>
             </footer>
         </form>
     </div>    
-
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js.bootstrap/bootstrap.min.js"></script>
 </html>
+
