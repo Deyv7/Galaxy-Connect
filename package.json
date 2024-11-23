@@ -1,0 +1,14 @@
+{
+  "name": "galaxy-connect",
+  "version": "1.0.0",
+  "description": "Galaxy Connect é o futuro dos alugueis.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deyvid Prado",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
