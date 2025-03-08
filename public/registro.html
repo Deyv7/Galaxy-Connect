@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="css/style-login.css">
     <link rel="icon" href="img/logo 128x128.png">
 
+    <!-- JS -->
+    <script src="/public/js/registro.js"></script>
+
     <title>Galaxy Connect</title>
 </head>
 
@@ -75,20 +78,18 @@
     </div>
 
     <div class="container">
-        <form method="POST" class="formLogin">
+        <form method="POST" action="/registro" class="formLogin">
             <h1>Registro</h1>
             <p>Faça o seu registro, para acessar a plataforma.</p>
 
-            <label for="email">Usuário</label>
-            <input type="email" name="user" placeholder="Digite seu Usuário" pattern="[A-Za-z0-9]+" autofocus
-                required />
+            <label for="name">Usuário</label>
+            <input type="text" name="name" placeholder="Digite seu Usuário" pattern="[A-Za-z0-9]+" autofocus required />
 
             <label for="email">E-mail</label>
             <input type="email" name="email" placeholder="Digite seu e-mail" required />
 
             <label for="password">Senha</label>
-            <input type="password" name="password" placeholder="Digite sua senha" required
-                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" />
+            <input type="password" name="password" placeholder="Digite sua senha" required pattern=".{8,}" />
 
             <label for="password-confirm">Confirme a Senha</label>
             <input type="password" name="password-confirm" placeholder="Digite novamente sua senha" required />
