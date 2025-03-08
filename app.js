@@ -1,5 +1,5 @@
 import express from 'express';
-import router from './routes/index.js';
+import router from './routes/router.js';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRotes from './routes/auth.js';
@@ -27,7 +27,7 @@ app.use(express.static('public'));
 app.use(router);
 
 // Usar as rotas de autenticação
-app.use('/auth', authRotes);
+app.use(authRotes);
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
