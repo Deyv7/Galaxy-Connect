@@ -1,44 +1,50 @@
-// Função para lidar com o envio do formulário de login
-console.log('Requisição recebida:', req.body);
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("🟢 O DOM foi carregado!");
 
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();  // Evita o envio padrão do formulário
+    const form = document.getElementById('Formlogin');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    console.log("Email:", email);
-    console.log("Password:", password);
-
-    // Verifica se os campos estão preenchidos
-    if (!email || !password) {
-        alert('Todos os campos são obrigatórios!');
+    if (!form) {
+        console.error("❌ Formulário não encontrado! Verifique o HTML.");
         return;
     }
 
-    // Log da requisição que será enviada
-    console.log('Enviando requisição para login:', {
-        email,
-        password
-    });
+    if (!emailInput || !passwordInput) {
+        console.error("❌ Campos de e-mail e senha não encontrados! Verifique os IDs no HTML.");
+        return;
+    }
 
-    // Fazendo a requisição para o backend
-    fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password })
-    })
-        .then(response => {
-            console.log('Resposta recebida:', response);
-            return response.json();
+    console.log("🟢 Formulário e campos de input encontrados!");
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();  // Evita o envio padrão do formulário
+        console.log("🔵 Evento de submit ativado!");
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        console.log("📩 Email:", email);
+        console.log("🔑 Password:", password);
+
+        if (!email || !password) {
+            alert('Todos os campos são obrigatórios!');
+            return;
+        }
+
+        console.log('🔵 JSON enviado:', JSON.stringify({ email, password }));
+
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
         })
+        .then(response => response.json())
         .then(data => {
             console.log('Dados da resposta:', data);
             if (data.token) {
-                localStorage.setItem('token', data.token);  // Salva o token no localStorage
-                window.location.href = '/dashboard';  // Redireciona para a dashboard
+                localStorage.setItem('token', data.token);
+                window.location.href = '/dashboard';
             } else {
                 alert('Erro: ' + (data.message || 'Falha ao fazer login.'));
             }
@@ -47,4 +53,5 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
             console.error('Erro ao fazer login:', error);
             alert('Erro ao tentar fazer login.');
         });
+    });
 });

@@ -7,9 +7,10 @@ const router = express.Router();
 
 // Rota de login para autenticação e geração do token JWT
 router.post('/login', async (req, res) => {
+    console.log('Recebendo requisição de login:', req.body);
     try {
         const { email, password } = req.body;
-
+        
         // Verifica se o usuário existe
         const user = await Users.findOne({ email });
         if (!user) {
