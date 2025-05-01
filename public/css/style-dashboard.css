@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Karla', sans-serif;
+    background: #1d1d1d;
+    color: #f1f1f1;
+}
+
+.material-symbols-outlined {
+    display: block;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 300,
+        'GRAD' 0,
+        'opsz' 10;
+}
+
+/* Navbar personalizada */
+.navbar {
+    background-color: #2d2d2d !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: #f1f1f1 !important;
+}
+
+/* Container principal do dashboard */
+.container {
+    margin-top: 40px;
+}
+
+/* Título da página */
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* Estilo dos cards */
+.card {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(72, 12, 168, 0.6);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #bb86fc;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #aaa;
+}
+
+footer a {
+    color: #bb86fc;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

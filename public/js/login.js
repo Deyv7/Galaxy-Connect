@@ -1,57 +1,86 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("🟢 O DOM foi carregado!");
-
+document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('Formlogin');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
+    const submitButton = form.querySelector('button[type="submit"]');
+    let errorElement = document.getElementById('error-message');
 
-    if (!form) {
-        console.error("❌ Formulário não encontrado! Verifique o HTML.");
-        return;
+    // Cria elemento de erro se não existir
+    if (!errorElement) {
+        errorElement = document.createElement('div');
+        errorElement.id = 'error-message';
+        Object.assign(errorElement.style, {
+            color: 'red',
+            marginTop: '10px',
+            display: 'none'
+        });
+        form.appendChild(errorElement);
     }
 
-    if (!emailInput || !passwordInput) {
-        console.error("❌ Campos de e-mail e senha não encontrados! Verifique os IDs no HTML.");
-        return;
-    }
+    const showError = (message, duration = 5000) => {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+        setTimeout(() => errorElement.style.display = 'none', duration);
+    };
 
-    console.log("🟢 Formulário e campos de input encontrados!");
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();  // Evita o envio padrão do formulário
-        console.log("🔵 Evento de submit ativado!");
+    // Função para redirecionar com o token
+    const redirectToDashboard = (token) => {
+        window.location.href = `/dashboard?token=${encodeURIComponent(token)}`;
+    };
 
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
-        console.log("📩 Email:", email);
-        console.log("🔑 Password:", password);
+        // Validações melhoradas
+        if (!validateEmail(email)) return showError('Email inválido');
+        if (password.length < 6) return showError('Senha deve ter 6+ caracteres');
 
-        if (!email || !password) {
-            alert('Todos os campos são obrigatórios!');
-            return;
-        }
+        try {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Autenticando...';
 
-        console.log('🔵 JSON enviado:', JSON.stringify({ email, password }));
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Dados da resposta:', data);
-            if (data.token) {
-                localStorage.setItem('token', data.token);
-                window.location.href = '/dashboard';
-            } else {
-                alert('Erro: ' + (data.message || 'Falha ao fazer login.'));
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || `Erro ${response.status}`);
             }
-        })
-        .catch(error => {
-            console.error('Erro ao fazer login:', error);
-            alert('Erro ao tentar fazer login.');
-        });
+
+            // Armazenamento seguro dos dados
+            if (data.token && data.user) {
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('userData', JSON.stringify({
+                    id: data.user.id,
+                    name: data.user.name,
+                    email: data.user.email
+                }));
+                
+                // Redireciona diretamente com o token na URL
+                redirectToDashboard(data.token);
+            } else {
+                throw new Error('Resposta inválida do servidor');
+            }
+
+        } catch (error) {
+            console.error('Erro no login:', error);
+            showError(error.message || 'Falha na conexão');
+            localStorage.removeItem('authToken');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Entrar';
+        }
     });
 });

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import authMiddleware from '../middlewares/authMiddleware.js';
 import Users from '../models/Users.js';
-import bcrypt from 'bcrypt';
 
 const router = Router();
 
@@ -10,11 +10,19 @@ const router = Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Rota para validar o token
+router.get('/validate-token', authMiddleware, (req, res) => {
+  res.json({ 
+      success: true,
+      user: req.user 
+  });
+});
+
 // Rota para a página inicial
 router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
-
+    
 // Rota para a página de login
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/login.html'));
@@ -25,22 +33,43 @@ router.get('/registro', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/registro.html'));
 });
 
-// Rota para o formulário de registro
-router.post('/registro', async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    // Criar o usuário
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new Users({ email, name, password: hashedPassword });
-    await user.save();
-
-    // Retornar uma resposta JSON com o status 201
-    res.status(201).json({ message: 'Usuário criado com sucesso!' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Erro ao criar usuário' });
+// Rotas Protegidas
+router.get('/dashboard', (req, res, next) => {
+  if (req.query.token) {
+      req.headers.authorization = `Bearer ${req.query.token}`;
   }
+  authMiddleware(req, res, next);
+}, (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/dashboard.html'));
 });
 
+router.get('/api/dashboard', authMiddleware, async (req, res) => {
+  try {
+    const user = await Users.findById(req.user.id);
+    
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    const dashboardData = {
+      user: {
+        name: user.name,
+        email: user.email
+      },
+      energia: {
+        valor: "150,50",
+        consumo: "320"
+      },
+      agua: {
+        valor: "85,20",
+        consumo: "25"
+      }
+    };
+
+    res.json(dashboardData);
+  } catch (error) {
+    console.error('Erro ao carregar dados:', error);
+    res.status(500).json({ error: 'Erro ao carregar dados do dashboard' });
+  }
+});
 export default router;

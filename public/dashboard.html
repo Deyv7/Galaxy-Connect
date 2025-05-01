@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/style-dashboard.css">
+</head>
+<body>
+  <div class="container my-5">
+    <h2 class="mb-4" id="dashboard-title">Dados de Consumo de Energia e Água do usuário <span>{{nome}}</span></h2> <!-- Substitua "{{nome}}" pelo nome do usuário autenticado         const user = await Users.findOne({ name });
+    if (!user) {
+        return res.status(400).json({ error: 'Usuário não encontrado!' });
+    }
+-->
+    <div class="row">
+      
+      <!-- Card Conta de Energia -->
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Conta de Energia</h5>
+            <p class="card-text">Valor: R$ <span id="valor-energia">--,--</span></p>
+            <p class="card-text">Consumo: <span id="consumo-energia">--</span> kWh</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Conta de Água -->
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Conta de Água</h5>
+            <p class="card-text">Valor: R$ <span id="valor-agua">--,--</span></p>
+            <p class="card-text">Consumo: <span id="consumo-agua">--</span> m³</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+<script src="js/dashboard.js"></script>
+</html>
