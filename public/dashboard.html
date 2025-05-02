@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GalaxyConnect - Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonte Karla -->
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Ícones Material -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Bibliotecas Chart.js e Moment.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.min.js"></script>
+ 
+  <!-- Estilo personalizado -->
+  <link rel="stylesheet" href="css/style-dashboard.css">
+
+</head>
+<body>
+  <!-- Barra de navegação -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="material-icons me-2">rocket_launch</i>
+        <span>Galaxy Connect</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="material-icons">menu</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#"><i class="material-icons me-1">home</i> Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="material-icons me-1">history</i> Histórico</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="material-icons me-1">settings</i> Configurações</a>
+          </li>
+          <li class="nav-item">
+            <button id="logout-btn" class="btn btn-link nav-link">
+              <i class="material-icons me-1">logout</i> Sair
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Conteúdo principal -->
+  <div class="container my-4">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">
+        <i class="material-icons me-2">dashboard</i>
+        Meu Consumo
+      </h2>
+      <div class="dropdown">
+        <button class="btn btn-outline dropdown-toggle" type="button" id="periodDropdown" data-bs-toggle="dropdown">
+          <i class="material-icons me-1">calendar_today</i>
+          <span id="current-period">Últimos 30 dias</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item period-option" href="#" data-period="7">Últimos 7 dias</a></li>
+          <li><a class="dropdown-item period-option" href="#" data-period="30">Últimos 30 dias</a></li>
+          <li><a class="dropdown-item period-option" href="#" data-period="90">Últimos 3 meses</a></li>
+          <li><a class="dropdown-item period-option" href="#" data-period="365">Últimos 12 meses</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Mensagens de status -->
+    <div id="loading-indicator" class="text-center my-4" style="display: none;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p class="mt-2">Carregando seus dados...</p>
+    </div>
+    
+    <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+
+    <!-- Resumo -->
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3 mb-md-0">
+        <div class="card summary-card bg-primary">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="summary-icon me-3">
+                <i class="material-icons">bolt</i>
+              </div>
+              <div>
+                <h6 class="card-subtitle mb-1">Energia</h6>
+                <h3 class="card-title mb-0" id="total-energy">-- kWh</h3>
+                <p class="card-text small mt-1">
+                  <span id="energy-variation" class="badge">--%</span>
+                  <span>em relação ao período anterior</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4 mb-3 mb-md-0">
+        <div class="card summary-card bg-info">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="summary-icon me-3">
+                <i class="material-icons">water_drop</i>
+              </div>
+              <div>
+                <h6 class="card-subtitle mb-1">Água</h6>
+                <h3 class="card-title mb-0" id="total-water">-- m³</h3>
+                <p class="card-text small mt-1">
+                  <span id="water-variation" class="badge">--%</span>
+                  <span>em relação ao período anterior</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card summary-card bg-success">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="summary-icon me-3">
+                <i class="material-icons">savings</i>
+              </div>
+              <div>
+                <h6 class="card-subtitle mb-1">Total</h6>
+                <h3 class="card-title mb-0" id="total-cost">R$ --,--</h3>
+                <p class="card-text small mt-1">
+                  <span id="cost-variation" class="badge">--%</span>
+                  <span>em relação ao período anterior</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row mb-4">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <div class="card chart-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Consumo de Energia (kWh)</h5>
+            <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-outline chart-period active" data-period="day">Dia</button>
+              <button type="button" class="btn btn-outline chart-period" data-period="week">Semana</button>
+              <button type="button" class="btn btn-outline- chart-period" data-period="month">Mês</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="energyChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card chart-card">
+          <div class="card-header">
+            <h5 class="mb-0">Distribuição de Custos</h5>
+          </div>
+          <div class="card-body">
+            <canvas id="costDistributionChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detalhes -->
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div class="card detail-card">
+          <div class="card-header">
+            <h5 class="mb-0">
+              <i class="material-icons me-2">bolt</i>
+              Detalhes da Energia
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="detail-item">
+              <div class="detail-label">Consumo atual</div>
+              <div class="detail-value" id="current-energy">-- kWh</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Valor atual</div>
+              <div class="detail-value" id="energy-cost">R$ --,--</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Média diária</div>
+              <div class="detail-value" id="avg-daily-energy">-- kWh</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Preço médio</div>
+              <div class="detail-value" id="avg-energy-price">R$ --,--/kWh</div>
+            </div>
+            <div class="progress mt-3">
+              <div id="energy-progress" class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
+            </div>
+            <div class="d-flex justify-content-between mt-1">
+              <small>0 kWh</small>
+              <small id="energy-limit">-- kWh</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card detail-card">
+          <div class="card-header">
+            <h5 class="mb-0">
+              <i class="material-icons me-2">water_drop</i>
+              Detalhes da Água
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="detail-item">
+              <div class="detail-label">Consumo atual</div>
+              <div class="detail-value" id="current-water">-- m³</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Valor atual</div>
+              <div class="detail-value" id="water-cost">R$ --,--</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Média diária</div>
+              <div class="detail-value" id="avg-daily-water">-- m³</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Preço médio</div>
+              <div class="detail-value" id="avg-water-price">R$ --,--/m³</div>
+            </div>
+            <div class="progress mt-3">
+              <div id="water-progress" class="progress-bar bg-info" role="progressbar" style="width: 0%"></div>
+            </div>
+            <div class="d-flex justify-content-between mt-1">
+              <small>0 m³</small>
+              <small id="water-limit">-- m³</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="py-3">
+    <div class="container">
+      <p class="mb-0 text-center">
+        &copy; 2024-2025 Galaxy-Connect - Todos os Direitos Reservados |
+        <span class="d-block d-md-inline-block mt-1 mt-md-0">
+          <a href="#" class="ms-md-3">Termos de Uso</a>
+          <a href="#" class="ms-3">Política de Privacidade</a>
+        </span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Modal de Dicas -->
+  <div class="modal fade" id="tipsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <i class="material-icons me-2">lightbulb</i>
+            Dicas para Economizar
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="energy-tips">
+            <h6>Energia:</h6>
+            <ul>
+              <li>Substitua lâmpadas por modelos LED</li>
+              <li>Desligue aparelhos em standby</li>
+              <li>Use o ar-condicionado em 23°C</li>
+            </ul>
+          </div>
+          <div id="water-tips">
+            <h6>Água:</h6>
+            <ul>
+              <li>Reduza o tempo no banho</li>
+              <li>Conserte vazamentos</li>
+              <li>Reutilize água da chuva</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Mais Dicas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

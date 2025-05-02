@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galaxy Connect - Conectando ideias e inovação">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Fonte Karla -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    
+    <!-- Estilo do Site -->
+    <link rel="stylesheet" href="css/style-index.css">
+    <link rel="icon" href="img/logo 128x128.png">
+
+    <title>Galaxy Connect | Início</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-galaxy sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <span class="material-symbols-outlined me-2">rocket_launch</span>
+                Galaxy Connect
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <span class="material-symbols-outlined align-middle">home</span>
+                            <span class="ms-1">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span class="material-symbols-outlined align-middle">update</span>
+                            <span class="ms-1">Updates</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <span class="material-symbols-outlined align-middle">more_up</span>
+                            <span class="ms-1">Sobre</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Descubra sobre nós</a></li>
+                            <li><a class="dropdown-item" href="#">O que fazemos?</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-login" href="login">
+                            <span class="material-symbols-outlined align-middle">login</span>
+                            <span class="ms-1">Login</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container text-center py-5">
+            <h1 class="display-4 fw-bold text-white mb-3">Bem-vindo ao Galaxy Connect</h1>
+            <p class="lead text-light mb-4">Conectando ideias, inovação e comunidade em um só lugar</p>
+            <a href="#updates" class="btn btn-primary btn-lg px-4 me-2">
+                <span class="material-symbols-outlined align-middle">update</span>
+                Ver Atualizações
+            </a>
+            <a href="#community" class="btn btn-outline-light btn-lg px-4">
+                <span class="material-symbols-outlined align-middle">groups</span>
+                Junte-se à Comunidade
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5" id="updates">
+        <div class="row g-4">
+            <!-- Updates Section -->
+            <div class="col-lg-7">
+                <div class="card shadow-sm border-0 rounded-4 h-100">
+                    <div class="card-header bg-galaxy text-white rounded-top-4">
+                        <h2 class="h5 mb-0">
+                            <span class="material-symbols-outlined align-middle">update</span>
+                            Últimas Atualizações
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="update-post mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge bg-primary me-2">1.0.1</span>
+                                <small class="text-muted">Publicado em: 01/06/2024</small>
+                            </div>
+                            <h3 class="h5">Nova Versão do Site</h3>
+                            <ul class="update-list">
+                                <li>Agora o site tem a nova aba updates</li>
+                                <li>Implementação do sistema de Login</li>
+                                <li>Nova logo e identidade visual</li>
+                                <li>Atualização da paleta de cores</li>
+                            </ul>
+                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Saiba mais</a>
+                        </div>
+                        
+                        <div class="update-post">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge bg-primary me-2">1.0</span>
+                                <small class="text-muted">Publicado em: 15/05/2024</small>
+                            </div>
+                            <h3 class="h5">Lançamento Inicial</h3>
+                            <p>Essa atualização traz a nova cara do site com design responsivo e minimalista, de um jeito fácil e interativo para o usuário.</p>
+                            <img src="https://i.ibb.co/JcZthsb/Design-Responsivo.png" class="img-fluid rounded-3 mb-2" alt="Demonstração do design responsivo">
+                            <a href="#" class="btn btn-sm btn-outline-primary">Saiba mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Community Section -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm border-0 rounded-4 h-100" id="community">
+                    <div class="card-header bg-galaxy text-white rounded-top-4">
+                        <h2 class="h5 mb-0">
+                            <span class="material-symbols-outlined align-middle">groups</span>
+                            Nossa Comunidade
+                        </h2>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <p class="mb-4">Junte-se à comunidade do Galaxy Connect e fique por dentro de todas as novidades e interações.</p>
+                        
+                        <div class="discord-widget ratio ratio-1x1 mb-4">
+                            <iframe src="https://discord.com/widget?id=817555826083364894&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                        </div>
+                        
+                        <a href="#" class="btn btn-primary mt-auto">
+                            <span class="material-symbols-outlined align-middle">group_add</span>
+                            Participar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-galaxy text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0">© 2024-2025 Galaxy Connect. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        Criado por <a href="https://github.com/Deyv7/" target="_blank" class="text-white fw-bold">Deyv7</a>
+                        <span class="material-symbols-outlined align-middle ms-1">code</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
