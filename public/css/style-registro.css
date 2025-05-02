@@ -1,8 +1,128 @@
-* {
-    margin: 0;
-    padding: 0;
+:root {
+    --text-primary: #495057;
+    --text-secondary: #6c757d;
+    --accent-color: #0d6efd;
+    --background-light: #f8f9fa;
+    --surface-light: #ffffff;
+    --border-color: #dee2e6;
 }
 
-footer > p {
-    color:white;
+body.light-mode {
+    background-color: var(--background-light);
+    color: var(--text-primary);
+    font-family: 'Karla', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--surface-light) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--text-primary) !important;
+}
+
+.nav-link.active {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+}
+
+/* Formulário */
+.form-registro {
+    background-color: var(--surface-light);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.form-registro h1 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.form-registro p {
+    color: var(--text-secondary);
+}
+
+.form-control {
+    background-color: var(--surface-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    background-color: var(--surface-light);
+    color: var(--text-primary);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+}
+
+/* Ícones */
+.material-icons {
+    vertical-align: middle;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+    color: var(--accent-color);
+}
+
+/* Links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #0b5ed7;
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer-main {
+    margin-top: auto;
+    padding: 1.5rem 0;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Mensagens de erro */
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-brand span {
+        display: none;
+    }
+    
+    .nav-link span {
+        display: none;
+    }
+    
+    .nav-link .material-icons {
+        margin-right: 0;
+        font-size: 1.5rem;
+    }
 }

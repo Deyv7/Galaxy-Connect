@@ -1,11 +1,26 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('Formlogin');
+    
+    // Verificação segura do formulário
+    if (!form) {
+        console.error('Formulário de login não encontrado!');
+        return;
+    }
+
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
-    const submitButton = form.querySelector('button[type="submit"]');
-    let errorElement = document.getElementById('error-message');
+    
+    // Busca o botão de submit de forma mais robusta
+    const submitButton = form.querySelector('button[type="submit"]') || 
+                        form.querySelector('input[type="submit"]');
+    
+    if (!submitButton) {
+        console.error('Botão de submit não encontrado no formulário!');
+        return;
+    }
 
     // Cria elemento de erro se não existir
+    let errorElement = document.getElementById('error-message');
     if (!errorElement) {
         errorElement = document.createElement('div');
         errorElement.id = 'error-message';
@@ -25,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // Função para redirecionar com o token
     const redirectToDashboard = (token) => {
         window.location.href = `/dashboard?token=${encodeURIComponent(token)}`;
     };
@@ -37,12 +51,28 @@ document.addEventListener("DOMContentLoaded", function() {
         const password = passwordInput.value.trim();
 
         // Validações melhoradas
-        if (!validateEmail(email)) return showError('Email inválido');
-        if (password.length < 6) return showError('Senha deve ter 6+ caracteres');
+        if (!email) {
+            return showError('Por favor, informe seu email');
+        }
+        
+        if (!validateEmail(email)) {
+            return showError('Email inválido');
+        }
+        
+        if (!password) {
+            return showError('Por favor, informe sua senha');
+        }
+        
+        if (password.length < 6) {
+            return showError('Senha deve ter 6+ caracteres');
+        }
 
         try {
-            submitButton.disabled = true;
-            submitButton.textContent = 'Autenticando...';
+            // Verificação segura antes de modificar o botão
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.value = 'Autenticando...'; // Para input type="submit"
+            }
 
             const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -68,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     email: data.user.email
                 }));
                 
-                // Redireciona diretamente com o token na URL
                 redirectToDashboard(data.token);
             } else {
                 throw new Error('Resposta inválida do servidor');
@@ -79,8 +108,11 @@ document.addEventListener("DOMContentLoaded", function() {
             showError(error.message || 'Falha na conexão');
             localStorage.removeItem('authToken');
         } finally {
-            submitButton.disabled = false;
-            submitButton.textContent = 'Entrar';
+            // Verificação segura antes de reabilitar
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.value = 'Acessar'; // Para input type="submit"
+            }
         }
     });
 });
